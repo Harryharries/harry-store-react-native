@@ -17,6 +17,8 @@ using Volo.Saas.Editions;
 using Volo.Saas.Tenants;
 using Volo.Abp.Gdpr;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
+using Acme.BookStore.Books;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace devset_front_end.EntityFrameworkCore;
 
@@ -44,6 +46,7 @@ public class devset_front_endDbContext :
      */
 
     // Identity
+    public DbSet<Book> Books { get; set; }
     public DbSet<IdentityUser> Users { get; set; }
     public DbSet<IdentityRole> Roles { get; set; }
     public DbSet<IdentityClaimType> ClaimTypes { get; set; }
@@ -85,6 +88,14 @@ public class devset_front_endDbContext :
         builder.ConfigureGdpr();
 
         /* Configure your own tables/entities inside here */
+
+        builder.Entity<Book>(b =>
+        {
+            b.ToTable(devset_front_endConsts.DbTablePrefix + "Books",
+                devset_front_endConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+        });
 
         //builder.Entity<YourEntity>(b =>
         //{

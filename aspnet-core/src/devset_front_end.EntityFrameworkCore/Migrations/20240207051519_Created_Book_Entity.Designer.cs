@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 using devset_front_end.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using devset_front_end.EntityFrameworkCore;
 namespace devset_front_end.Migrations
 {
     [DbContext(typeof(devset_front_endDbContext))]
-    partial class devset_front_endDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240207051519_Created_Book_Entity")]
+    partial class Created_Book_Entity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
